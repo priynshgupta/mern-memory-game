@@ -36,8 +36,7 @@ const Navbar = () => {
         </button>
         <NavLink to="/leaderboard" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
           Leaderboard
-        </NavLink>
-        <div
+        </NavLink>        <div
           className="sound-control"
           onMouseEnter={() => setShowVolumeControl(true)}
           onMouseLeave={() => setShowVolumeControl(false)}
@@ -48,7 +47,9 @@ const Navbar = () => {
             title={isMuted ? "Unmute" : "Mute"}
           >
             {isMuted ? '🔇' : '🔊'}
-          </button>          {showVolumeControl && (
+          </button>
+
+          {showVolumeControl && (
             <div className="volume-slider-container">
               <div className="volume-label">Volume</div>
               <input
