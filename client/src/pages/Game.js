@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import GameStats from '../components/GameStats';
 import { useGame } from '../contexts/GameContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useAudio } from '../contexts/AudioContext';
 import '../assets/css/Game.css';
 
 const Game = () => {
@@ -20,27 +21,29 @@ const Game = () => {
     currentLevel,
     nextLevel
   } = useGame();
-
   const { isAuthenticated, user } = useAuth();
+  const { playMusic } = useAudio();
   const navigate = useNavigate();
   const [showAnimation, setShowAnimation] = useState(false);
   const boardRef = useRef(null);
 
   // Animation for card matching
   const [lastMatchedCards, setLastMatchedCards] = useState([]);
-  // Start the game when component mounts if not already started
-  useEffect(() => {
+  // Start the game when component mounts if not already started  useEffect(() => {
     if (!gameStarted && !gameOver) {
       // Start at the user's level if authenticated, otherwise level 1
       const startLevel = isAuthenticated && user ? Math.min(user.level, 3) : 1;
       startGame(startLevel);
+
+      // Ensure music is playing when game starts
+      playMusic();
     }
 
     // Show welcome animation
     setTimeout(() => {
       setShowAnimation(true);
     }, 300);
-  }, [gameStarted, gameOver, startGame, isAuthenticated, user]);
+  }, [gameStarted, gameOver, startGame, isAuthenticated, user, playMusic]);
 
   // Track matched cards for animation
   useEffect(() => {

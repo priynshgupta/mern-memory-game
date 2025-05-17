@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useAudio } from '../contexts/AudioContext';
 import '../assets/css/Navbar.css';
 
 const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth();
+  const { isMuted, toggleMute, playMusic, volume, setAudioVolume } = useAudio();
   const navigate = useNavigate();
+  const [showVolumeControl, setShowVolumeControl] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+
+  const handlePlayGame = () => {
+    // Start music when Play Game is clicked
+    playMusic();
+    navigate('/game');
+  };
+
+  const handleVolumeChange = (e) => {
+    setAudioVolume(parseFloat(e.target.value));
   };
 
   return (
@@ -18,13 +31,39 @@ const Navbar = () => {
       </div>      <div className="navbar-menu">
         <NavLink to="/" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
           Home
-        </NavLink>
-        <NavLink to="/game" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
+        </NavLink>        <button onClick={handlePlayGame} className="nav-item">
           Play Game
-        </NavLink>
+        </button>
         <NavLink to="/leaderboard" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
           Leaderboard
         </NavLink>
+        <div
+          className="sound-control"
+          onMouseEnter={() => setShowVolumeControl(true)}
+          onMouseLeave={() => setShowVolumeControl(false)}
+        >
+          <button
+            className="sound-toggle-btn"
+            onClick={toggleMute}
+            title={isMuted ? "Unmute" : "Mute"}
+          >
+            {isMuted ? '🔇' : '🔊'}
+          </button>
+
+          {showVolumeControl && (
+            <div className="volume-slider-container">
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+                className="volume-slider"
+              />
+            </div>
+          )}
+        </div>
       </div>
       <div className="navbar-end">
         {isAuthenticated ? (

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { GameProvider } from './contexts/GameContext';
+import { AudioProvider } from './contexts/AudioContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Game from './pages/Game';
@@ -16,7 +17,9 @@ function App() {
     <Router>
       <AuthProvider>
         <GameProvider>
-          <AppContent />
+          <AudioProvider>
+            <AppContent />
+          </AudioProvider>
         </GameProvider>
       </AuthProvider>
     </Router>

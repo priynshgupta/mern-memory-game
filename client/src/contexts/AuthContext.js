@@ -81,10 +81,10 @@ export const AuthProvider = ({ children }) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
     } else {
       delete axios.defaults.headers.common['Authorization'];
-    }
+    }    return () => {}; // Empty cleanup function
+  }, [state.token]);
 
-    return () => {}; // Empty cleanup function
-  }, [state.token]);  // Load user data if token exists - separate effect to avoid circular dependencies
+  // Load user data if token exists - separate effect to avoid circular dependencies
   useEffect(() => {
     // Function to fetch user data
     const loadUser = async () => {
