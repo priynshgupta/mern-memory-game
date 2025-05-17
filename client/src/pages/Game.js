@@ -26,10 +26,11 @@ const Game = () => {
   const navigate = useNavigate();
   const [showAnimation, setShowAnimation] = useState(false);
   const boardRef = useRef(null);
-
   // Animation for card matching
   const [lastMatchedCards, setLastMatchedCards] = useState([]);
-  // Start the game when component mounts if not already started  useEffect(() => {
+
+  // Start the game when component mounts if not already started
+  useEffect(() => {
     if (!gameStarted && !gameOver) {
       // Start at the user's level if authenticated, otherwise level 1
       const startLevel = isAuthenticated && user ? Math.min(user.level, 3) : 1;

@@ -1,10 +1,9 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
+// Use the existing audio file in the assets directory
+import backgroundMusic from '../assets/audio/background-music.mp3';
 
 // Audio context
 const AudioContext = createContext();
-
-// Use the existing audio file in the assets directory
-import backgroundMusic from '../assets/audio/background-music.mp3';
 
 export const AudioProvider = ({ children }) => {
   const [isMuted, setIsMuted] = useState(() => {
