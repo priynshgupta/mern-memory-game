@@ -84,17 +84,29 @@ export const AuthProvider = ({ children }) => {
     }
 
     return () => {}; // Empty cleanup function
-  }, [state.token]);
-  // Load user data if token exists - separate effect to avoid circular dependencies
+  }, [state.token]);  // Load user data if token exists - separate effect to avoid circular dependencies
   useEffect(() => {
     // Function to fetch user data
     const loadUser = async () => {
       const token = localStorage.getItem('token');
 
-      // Only proceed if we have a token but no user data yet      if (token && !state.user && isMounted.current) {
+      // Only proceed if we have a token but no user data yet
+      if (token && !state.user && isMounted.current) {
         try {
           // Set loading to true before the request
-          dispatch({ type: 'AUTH_LOADING' });          const res = await axiosInstance.get(`/auth/user`);
+          dispatch({ type: 'AUTH_LOADING' });
+            // Try to get user data from the server
+          let res;
+          if (process.env.NODE_ENV === 'production') {
+            res = await axiosInstance.get(`/auth/user`);
+          } else {
+            // For local development
+            res = await axios.get(`${API_URL}/auth/user`, {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+          }
 
           // Check if component is still mounted before updating state
           if (isMounted.current) {
@@ -119,10 +131,12 @@ export const AuthProvider = ({ children }) => {
     // Cleanup function to prevent state updates after unmount
     return () => {
       isMounted.current = false;
-    };  // We intentionally don't include state.user as a dependency to avoid causing
+    };
+  // We intentionally don't include state.user as a dependency to avoid causing
   // infinite re-renders, as this effect is only supposed to run on mount
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);  // Register user
+  }, []);
+    // Register user
   const register = async (userData) => {
     dispatch({ type: 'REGISTER_START' });
     try {
@@ -130,11 +144,24 @@ export const AuthProvider = ({ children }) => {
         username: userData.username,
         email: userData.email,
         passwordLength: userData.password ? userData.password.length : 0
-      });      const res = await axiosInstance.post(`/auth/register`, userData, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
       });
+
+      // For compatibility with both local and deployed environments
+      let res;
+      if (process.env.NODE_ENV === 'production') {
+        res = await axiosInstance.post(`/auth/register`, userData, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      } else {
+        // For local development
+        res = await axios.post(`${API_URL}/auth/register`, userData, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
 
       console.log('Registration successful:', res.data);
       dispatch({
@@ -155,12 +182,23 @@ export const AuthProvider = ({ children }) => {
       });
       throw err;
     }
-  };
-  // Login user
+  };  // Login user
   const login = async (userData) => {
     dispatch({ type: 'LOGIN_START' });
     try {
-      const res = await axiosInstance.post(`/auth/login`, userData);
+      // For compatibility with both local and deployed environments
+      let res;
+      if (process.env.NODE_ENV === 'production') {
+        res = await axiosInstance.post(`/auth/login`, userData);
+      } else {
+        // For local development
+        res = await axios.post(`${API_URL}/auth/login`, userData, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
+
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: res.data
@@ -179,11 +217,23 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
   };
-
   // Update user stats
   const updateStats = async (stats) => {
     try {
-      const res = await axiosInstance.put(`/auth/update-stats`, stats);
+      // For compatibility with both local and deployed environments
+      let res;
+      if (process.env.NODE_ENV === 'production') {
+        res = await axiosInstance.put(`/auth/update-stats`, stats);
+      } else {
+        // For local development
+        res = await axios.put(`${API_URL}/auth/update-stats`, stats, {
+          headers: {
+            'Authorization': `Bearer ${state.token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+      }
+
       dispatch({
         type: 'UPDATE_USER',
         payload: res.data
