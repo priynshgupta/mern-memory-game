@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useContext, useEffect, useCallback } from 'react';
+import axios from 'axios';
 import axiosInstance from '../config/axiosConfig';
 import API_URL from '../config/api';
 import { useAuth } from './AuthContext';
@@ -273,7 +274,7 @@ export const GameProvider = ({ children }) => {
         payload: err.response?.data?.message || 'Error fetching leaderboard'
       });
     }
-  }, [dispatch, API_URL]);
+  }, [dispatch]);
   // Fetch user's scores with useCallback to maintain function identity
   const fetchUserScores = useCallback(async () => {
     if (!isAuthenticated) return;
