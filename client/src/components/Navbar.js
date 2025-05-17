@@ -48,10 +48,9 @@ const Navbar = () => {
             title={isMuted ? "Unmute" : "Mute"}
           >
             {isMuted ? '🔇' : '🔊'}
-          </button>
-
-          {showVolumeControl && (
+          </button>          {showVolumeControl && (
             <div className="volume-slider-container">
+              <div className="volume-label">Volume</div>
               <input
                 type="range"
                 min="0"
