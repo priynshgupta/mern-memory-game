@@ -21,6 +21,9 @@ A full-stack web application created for the CodeCircuit Hackathon. This memory 
 
 ## Getting Started
 
+## Some Screenshots
+![Login Page](client/src/assets/images/Screenshot 2025-05-17 170351.png)
+
 ### Prerequisites
 
 - Node.js (v14 or higher)
