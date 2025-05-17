@@ -10,6 +10,8 @@ A full-stack web application created for the CodeCircuit Hackathon. This memory 
 - 🏆 **Global Leaderboard**: Compare your skills with other players
 - ⬆️ **Level Progression**: Three increasing difficulty levels with more cards to match
 - 📊 **Personal Stats**: Track your high scores and completed levels
+- 🎵 **Background Music**: Immersive gameplay music with volume controls
+- 📱 **Fully Responsive**: Optimized gameplay experience on desktop, tablet and mobile devices
 
 ## Tech Stack
 
@@ -17,7 +19,9 @@ A full-stack web application created for the CodeCircuit Hackathon. This memory 
 - **Backend**: Node.js, Express
 - **Database**: MongoDB with Mongoose
 - **Authentication**: JWT (JSON Web Tokens)
-- **Styling**: Custom CSS
+- **Styling**: Custom CSS with responsive design
+- **Audio**: Web Audio API for background music and sound effects
+- **Responsive Design**: Media queries for mobile, tablet, and desktop layouts
 
 ## Getting Started
 
@@ -59,17 +63,38 @@ A full-stack web application created for the CodeCircuit Hackathon. This memory 
 ## How to Play
 
 1. **Register/Login**: Create an account or log in to save your progress
-2. **Start Game**: Click "Play Game" to begin
+2. **Start Game**: Click "Play Game" to begin (this will also start background music)
 3. **Match Cards**: Click on cards to flip them and find matching pairs
 4. **Complete Level**: Match all pairs to complete the current level
 5. **Level Up**: Progress to more challenging levels with more cards
 6. **Track Progress**: Check the leaderboard to see how you rank globally
+7. **Audio Controls**: Use the sound icon in the navbar to toggle music on/off and adjust volume
 
 ## Game Levels
 
 - **Level 1**: 6 pairs of cards (12 total)
 - **Level 2**: 8 pairs of cards (16 total)
 - **Level 3**: 10 pairs of cards (20 total)
+
+## Screenshots
+
+### Home Page
+![Home Page](./client/src/assets/images/Screenshot%202025-05-17%20170351.png)
+
+### Game Board
+![Game Board](./client/src/assets/images/Screenshot%202025-05-17%20181010.png)
+
+### Game Play - Finding Matches
+![Game Play](./client/src/assets/images/Screenshot%202025-05-17%20181020.png)
+
+### Level Complete
+![Level Complete](./client/src/assets/images/Screenshot%202025-05-17%20181049.png)
+
+### Leaderboard
+![Leaderboard](./client/src/assets/images/Screenshot%202025-05-17%20181106.png)
+
+### User Authentication
+![User Authentication](./client/src/assets/images/Screenshot%202025-05-17%20181120.png)
 
 ## Development
 
