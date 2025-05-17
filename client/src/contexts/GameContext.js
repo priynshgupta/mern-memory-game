@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axiosConfig';
 import API_URL from '../config/api';
 import { useAuth } from './AuthContext';
 
@@ -197,8 +197,7 @@ export const GameProvider = ({ children }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [state.flippedCards]);
-  // Save score when game is over
+  }, [state.flippedCards]);  // Save score when game is over
   useEffect(() => {
     // Only run when the game is over and user is logged in
     if (!state.gameOver || !isAuthenticated || !user) return;
@@ -207,7 +206,7 @@ export const GameProvider = ({ children }) => {
       const timeTaken = Math.floor((state.endTime - state.startTime) / 1000);
 
       try {        // Save score to API
-        await axios.post(`${API_URL}/scores`, {
+        await axiosInstance.post(`/scores`, {
           score: state.score,
           level: state.currentLevel,
           timeTaken
@@ -256,36 +255,38 @@ export const GameProvider = ({ children }) => {
         payload: shuffledCards
       });
     }
-  };
-  // Fetch leaderboard with useCallback to maintain function identity
+  };  // Fetch leaderboard with useCallback to maintain function identity
   const fetchLeaderboard = useCallback(async () => {
     dispatch({ type: 'FETCH_LEADERBOARD_START' });
     try {
+      // Use axios directly for the leaderboard since it doesn't require authentication
+      // This ensures the leaderboard loads even for non-logged in users
       const res = await axios.get(`${API_URL}/scores/leaderboard`);
       dispatch({
         type: 'FETCH_LEADERBOARD_SUCCESS',
         payload: res.data
       });
     } catch (err) {
+      console.error('Leaderboard fetch error:', err);
       dispatch({
         type: 'FETCH_LEADERBOARD_ERROR',
         payload: err.response?.data?.message || 'Error fetching leaderboard'
       });
     }
-  }, [dispatch]);
-
+  }, [dispatch, API_URL]);
   // Fetch user's scores with useCallback to maintain function identity
   const fetchUserScores = useCallback(async () => {
     if (!isAuthenticated) return;
 
     dispatch({ type: 'FETCH_USER_SCORES_START' });
     try {
-      const res = await axios.get(`${API_URL}/scores/user`);
+      const res = await axiosInstance.get(`/scores/user`);
       dispatch({
         type: 'FETCH_USER_SCORES_SUCCESS',
         payload: res.data
       });
     } catch (err) {
+      console.error('User scores fetch error:', err);
       dispatch({
         type: 'FETCH_USER_SCORES_ERROR',
         payload: err.response?.data?.message || 'Error fetching user scores'

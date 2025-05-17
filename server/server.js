@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 // Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://dhyaan-chakra.vercel.app', 'http://localhost:3000']
+    ? ['https://dhyaan-chakra.vercel.app', 'https://mern-memory-game.vercel.app', 'http://localhost:3000']
     : 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -54,6 +54,11 @@ app.use('/api/scores', scoreRoutes);
 // Basic route
 app.get('/', (req, res) => {
   res.send('Memory Game API is running');
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', message: 'API is healthy', timestamp: new Date() });
 });
 
 // Start server
