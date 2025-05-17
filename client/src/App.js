@@ -1,101 +1,68 @@
-import React, { useState, useEffect } from "react";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { GameProvider } from './contexts/GameContext';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Game from './pages/Game';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Leaderboard from './pages/Leaderboard';
+import './App.css';
 
-const cardsData = [
-  { id: 1, emoji: "🐶" },
-  { id: 2, emoji: "🐱" },
-  { id: 3, emoji: "🐭" },
-  { id: 4, emoji: "🐰" },
-  { id: 5, emoji: "🦊" },
-  { id: 6, emoji: "🐻" },
-];
-
-function shuffle(array) {
-  return array
-    .concat(array)
-    .sort(() => Math.random() - 0.5)
-    .map((card, index) => ({ ...card, uniqueId: index, matched: false }));
-}
-
-export default function App() {
-  const [cards, setCards] = useState(() => shuffle(cardsData));
-  const [choiceOne, setChoiceOne] = useState(null);
-  const [choiceTwo, setChoiceTwo] = useState(null);
-  const [disabled, setDisabled] = useState(false);
-  const [score, setScore] = useState(0);
-
-  function handleChoice(card) {
-    if (!disabled) {
-      choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
-    }
-  }
-
-  useEffect(() => {
-    if (choiceOne && choiceTwo) {
-      setDisabled(true);
-      if (choiceOne.id === choiceTwo.id) {
-        setCards(prevCards =>
-          prevCards.map(card =>
-            card.id === choiceOne.id ? { ...card, matched: true } : card
-          )
-        );
-        setScore(prev => prev + 1);
-        resetTurn();
-      } else {
-        setTimeout(() => resetTurn(), 1000);
-      }
-    }
-  }, [choiceOne, choiceTwo]);
-
-  function resetTurn() {
-    setChoiceOne(null);
-    setChoiceTwo(null);
-    setDisabled(false);
-  }
-
-  function resetGame() {
-    setCards(shuffle(cardsData));
-    setScore(0);
-    resetTurn();
-  }
-
+// Protected route component needs to be used inside AuthProvider
+function App() {
   return (
-    <div style={{ padding: 20, fontFamily: "Arial" }}>
-      <h1>Memory Matching Game</h1>
-      <button onClick={resetGame}>Restart Game</button>
-      <p>Score: {score}</p>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 80px)",
-          gap: 10,
-          marginTop: 20,
-        }}
-      >
-        {cards.map(card => (
-          <div
-            key={card.uniqueId}
-            onClick={() => !card.matched && handleChoice(card)}
-            style={{
-              width: 80,
-              height: 80,
-              fontSize: 40,
-              backgroundColor:
-                card === choiceOne || card === choiceTwo || card.matched
-                  ? "#fff"
-                  : "#444",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              cursor: "pointer",
-              borderRadius: 8,
-              userSelect: "none",
-            }}
-          >
-            {(card === choiceOne || card === choiceTwo || card.matched) &&
-              card.emoji}
-          </div>
-        ))}
-      </div>
-    </div>
+    <Router>
+      <AuthProvider>
+        <GameProvider>
+          <AppContent />
+        </GameProvider>
+      </AuthProvider>
+    </Router>
   );
 }
+
+// Move the main content into a separate component that has access to AuthContext
+const AppContent = () => {
+  return (
+    <div className="app-container">
+      <Navbar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/game" element={<Game />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/leaderboard"
+            element={
+              <ProtectedRoute>
+                <Leaderboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </main>
+      <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} Memory Match Game | Created for Hackathon</p>
+      </footer>
+    </div>
+  );
+};
+
+// Protected route component now correctly inside the auth context
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) return <div>Loading...</div>;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+};
+
+export default App;

@@ -1,0 +1,433 @@
+.game-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm10 17a7 7 0 100-14 7 7 0 000 14zm20 0a7 7 0 100-14 7 7 0 000 14zM10 37a7 7 0 100-14 7 7 0 000 14zm10-17h20v20H20V20zm10 17a7 7 0 100-14 7 7 0 000 14z' fill='%23138086' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative elements */
+.game-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--tertiary-color), var(--quaternary-color));
+}
+
+.game-board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+  perspective: 1000px;
+  position: relative;
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 107, 53, 0.2);
+  background: rgba(255, 255, 255, 0.5);
+  animation: boardFadeIn 1s ease-in-out;
+}
+
+@keyframes boardFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.game-over {
+  background-color: var(--light-color);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  margin: 50px auto;
+  max-width: 500px;
+  border: 3px solid var(--primary-color);
+  position: relative;
+  animation: celebrateWin 0.8s ease-out;
+}
+
+@keyframes celebrateWin {
+  0% { transform: translateY(30px); opacity: 0; }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Rangoli-inspired decorative corners */
+.game-over::before,
+.game-over::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5C16.2 5 5 16.2 5 30s11.2 25 25 25 25-11.2 25-25S43.8 5 30 5zm0 45c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z' fill='%23FF6B35'/%3E%3Cpath d='M30 15c-8.3 0-15 6.7-15 15s6.7 15 15 15 15-6.7 15-15-6.7-15-15-15zm0 25c-5.5 0-10-4.5-10-10s4.5-10 10-10 10 4.5 10 10-4.5 10-10 10z' fill='%23138086'/%3E%3Ccircle cx='30' cy='30' r='5' fill='%23FFC045'/%3E%3C/svg%3E");
+  opacity: 0.6;
+}
+
+.game-over::before {
+  top: -15px;
+  left: -15px;
+}
+
+.game-over::after {
+  bottom: -15px;
+  right: -15px;
+  transform: rotate(180deg);
+}
+
+.game-over h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+  font-size: 32px;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: inline-block;
+}
+
+/* Decorative underline for heading */
+.game-over h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), var(--secondary-color), var(--primary-color), transparent);
+}
+
+.game-results {
+  margin: 30px 0;
+  text-align: left;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 15px;
+  border-left: 5px solid var(--secondary-color);
+}
+
+.game-results p {
+  margin: 15px 0;
+  position: relative;
+  padding-left: 20px;
+  transition: all 0.3s ease;
+}
+
+.game-results p:hover {
+  transform: translateX(5px);
+}
+
+/* Decorative bullet points */
+.game-results p::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+}
+
+.game-results span {
+  font-weight: bold;
+  color: var(--tertiary-color);
+  margin-left: 10px;
+  border-bottom: 1px dashed var(--secondary-color);
+  padding-bottom: 2px;
+}
+
+.game-options {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  padding-top: 15px;
+}
+
+/* Decorative divider */
+.game-options::before {
+  content: "⚜";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  color: var(--accent-color);
+}
+
+.level-up-btn, .restart-btn, .leaderboard-btn {
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  border: none;
+  font-weight: bold;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.level-up-btn::after, .restart-btn::after, .leaderboard-btn::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  top: -50%;
+  width: 120%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(35deg);
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.level-up-btn:hover::after, .restart-btn:hover::after, .leaderboard-btn:hover::after {
+  left: 100%;
+}
+
+.level-up-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  box-shadow: 0 4px 0 rgba(19, 128, 134, 0.5);
+}
+
+.level-up-btn:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 rgba(19, 128, 134, 0.5);
+}
+
+.level-up-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 0 rgba(19, 128, 134, 0.5);
+}
+
+.restart-btn {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 0 rgba(255, 107, 53, 0.5);
+}
+
+.restart-btn:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 rgba(255, 107, 53, 0.5);
+}
+
+.restart-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 0 rgba(255, 107, 53, 0.5);
+}
+
+.leaderboard-btn {
+  background-color: var(--accent-color);
+  color: white;
+  box-shadow: 0 4px 0 rgba(255, 192, 69, 0.5);
+}
+
+.leaderboard-btn:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 rgba(255, 192, 69, 0.5);
+}
+
+.leaderboard-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 0 rgba(255, 192, 69, 0.5);
+}
+
+.max-level {
+  color: var(--quaternary-color);
+  font-weight: bold;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px dashed var(--quaternary-color);
+  border-radius: 8px;
+  background-color: rgba(216, 17, 89, 0.05);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .game-board {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .memory-card {
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .memory-card {
+    width: 60px;
+    height: 60px;
+    margin: 4px;
+  }
+
+  .card-content {
+    font-size: 32px;
+  }
+}
+
+/* Add fade-in animation for the container */
+.game-container.fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mantra banner */
+.mantra-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(19, 128, 134, 0.1));
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.mantra-symbol {
+  font-size: 24px;
+  color: var(--primary-color);
+  margin-right: 10px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.mantra-banner p {
+  margin: 0;
+  font-style: italic;
+  color: var(--tertiary-color);
+  font-size: 14px;
+}
+
+/* Level indicator */
+.level-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+  color: var(--quaternary-color);
+}
+
+.level-lotus {
+  display: flex;
+  margin-right: 10px;
+}
+
+.lotus-petal {
+  color: var(--accent-color);
+  font-size: 20px;
+  animation: rotatePetal 4s infinite linear;
+  display: inline-block;
+  margin-right: 3px;
+}
+
+@keyframes rotatePetal {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.level-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Board decorations */
+.board-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.corner-decoration {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath d='M0 0h30v1H1v29H0V0zm30 30H0v-1h29V0h1v30z' fill='%23FF6B35'/%3E%3C/svg%3E");
+  opacity: 0.7;
+}
+
+.top-left {
+  top: 5px;
+  left: 5px;
+}
+
+.top-right {
+  top: 5px;
+  right: 5px;
+  transform: rotate(90deg);
+}
+
+.bottom-left {
+  bottom: 5px;
+  left: 5px;
+  transform: rotate(-90deg);
+}
+
+.bottom-right {
+  bottom: 5px;
+  right: 5px;
+  transform: rotate(180deg);
+}
+
+/* Button icons */
+.btn-icon {
+  margin-right: 8px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.level-up-btn:hover .btn-icon {
+  transform: translateY(-3px);
+}
+
+.restart-btn:hover .btn-icon {
+  transform: rotate(360deg);
+}
+
+/* Celebration animation */
+.celebration-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle, transparent 20%, var(--light-color) 20%, var(--light-color) 80%, transparent 80%, transparent),
+              radial-gradient(circle, transparent 20%, var(--light-color) 20%, var(--light-color) 80%, transparent 80%, transparent) 25px 25px,
+              linear-gradient(var(--accent-color) 2px, transparent 2px) 0 -1px,
+              linear-gradient(90deg, var(--accent-color) 2px, var(--light-color) 2px) -1px 0;
+  background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+  opacity: 0.1;
+  z-index: -1;
+}

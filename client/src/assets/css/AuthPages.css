@@ -1,0 +1,412 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+  padding: 20px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z' fill='%23FFFFFF' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"),
+    linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative corner mandala */
+.auth-container::before,
+.auth-container::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cpath d='M100 5C48.6 5 5 48.6 5 100s43.6 95 95 95 95-43.6 95-95S151.4 5 100 5zm0 180c-47 0-85-38-85-85s38-85 85-85 85 38 85 85-38 85-85 85z' fill='%23FFC045' fill-opacity='0.2'/%3E%3Ccircle cx='100' cy='100' r='50' stroke='%23FFC045' stroke-opacity='0.15' stroke-width='10' fill='none'/%3E%3Ccircle cx='100' cy='100' r='65' stroke='%23FFC045' stroke-opacity='0.1' stroke-width='5' fill='none'/%3E%3Cpath d='M100 15v170M15 100h170M29.3 29.3l141.4 141.4M29.3 170.7l141.4-141.4' stroke='%23FFC045' stroke-opacity='0.15' stroke-width='3'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.auth-container::before {
+  top: -100px;
+  left: -100px;
+}
+
+.auth-container::after {
+  bottom: -100px;
+  right: -100px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+  background-color: var(--light-color);
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  padding: 35px;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+/* Decorative corner patterns */
+.auth-card::before,
+.auth-card::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  opacity: 0.2;
+}
+
+.auth-card::before {
+  top: 0;
+  right: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5C16.2 5 5 16.2 5 30s11.2 25 25 25 25-11.2 25-25S43.8 5 30 5zm0 40c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z' fill='%23FF6B35'/%3E%3C/svg%3E");
+  transform: rotate(90deg);
+}
+
+.auth-card::after {
+  bottom: 0;
+  left: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5C16.2 5 5 16.2 5 30s11.2 25 25 25 25-11.2 25-25S43.8 5 30 5zm0 40c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z' fill='%23138086'/%3E%3C/svg%3E");
+  transform: rotate(-90deg);
+}
+
+.auth-card h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  text-align: center;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Decorative underline for heading */
+.auth-card h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: var(--secondary-color);
+  margin-bottom: 30px;
+  font-style: italic;
+  position: relative;
+}
+
+/* Om symbol for auth cards */
+/* Removed the Om symbol from subtitle since we have spiritual-symbol div now */
+
+.spiritual-symbol {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5C16.2 5 5 16.2 5 30s11.2 25 25 25 25-11.2 25-25S43.8 5 30 5zm0 45c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z' fill='%23FF6B35'/%3E%3Cpath d='M30 15c-8.3 0-15 6.7-15 15s6.7 15 15 15 15-6.7 15-15-6.7-15-15-15zm0 25c-5.5 0-10-4.5-10-10s4.5-10 10-10 10 4.5 10 10-4.5 10-10 10z' fill='%23138086'/%3E%3Ccircle cx='30' cy='30' r='5' fill='%23FFC045'/%3E%3Ctext x='30' y='33' text-anchor='middle' font-size='14' font-family='Arial' fill='%233D2645' font-weight='bold'%3Eॐ%3C/text%3E%3C/svg%3E");
+  position: relative;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    filter: drop-shadow(0 0 2px var(--accent-color));
+    transform: scale(1);
+  }
+  100% {
+    filter: drop-shadow(0 0 10px var(--accent-color));
+    transform: scale(1.05);
+  }
+}
+
+.auth-error {
+  background-color: rgba(216, 17, 89, 0.1);
+  color: var(--error-color);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  border-left: 4px solid var(--error-color);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+/* Card rangoli decoration pattern */
+.auth-form::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23138086' fill-opacity='0.05'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--dark-color);
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 0.5px;
+  padding-left: 5px;
+}
+
+.form-group input {
+  padding: 14px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  animation: formFieldFadeIn 0.5s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes formFieldFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add staggered delay to form fields */
+.form-group:nth-child(1) input { animation-delay: 0.1s; }
+.form-group:nth-child(2) input { animation-delay: 0.2s; }
+.form-group:nth-child(3) input { animation-delay: 0.3s; }
+.form-group:nth-child(4) input { animation-delay: 0.4s; }
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(255, 192, 69, 0.2);
+  transform: translateY(-1px);
+}
+
+.form-group input.error {
+  border-color: var(--error-color);
+  box-shadow: 0 0 0 2px rgba(216, 17, 89, 0.1);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 13px;
+  margin-top: 6px;
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.error-message::before {
+  content: "!";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--error-color);
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  line-height: 16px;
+  margin-right: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.auth-button {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  margin-top: 15px;
+  box-shadow: 0 4px 0 rgba(19, 128, 134, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-button::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  top: -50%;
+  width: 120%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(35deg);
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.btn-icon {
+  margin-right: 8px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 rgba(19, 128, 134, 0.5);
+}
+
+.auth-button:hover::after {
+  left: 100%;
+}
+
+.auth-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 0 rgba(19, 128, 134, 0.5);
+}
+
+.auth-redirect {
+  text-align: center;
+  margin-top: 25px;
+  color: var(--tertiary-color);
+  position: relative;
+  padding-top: 15px;
+}
+
+.auth-redirect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+.auth-redirect span,
+.auth-redirect a {
+  color: var(--primary-color);
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.auth-redirect span::after,
+.auth-redirect a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--primary-color);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.auth-redirect span:hover::after,
+.auth-redirect a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.auth-redirect span:hover,
+.auth-redirect a:hover {
+  color: var(--accent-color);
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .auth-container::before,
+  .auth-container::after {
+    width: 150px;
+    height: 150px;
+    opacity: 0.2;
+  }
+
+  .auth-card {
+    padding: 25px;
+    max-width: 400px;
+  }
+
+  .auth-card h2 {
+    font-size: 28px;
+  }
+
+  .spiritual-symbol {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 15px;
+  }
+
+  .auth-container::before,
+  .auth-container::after {
+    display: none;
+  }
+
+  .auth-card {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .auth-card::before,
+  .auth-card::after {
+    width: 40px;
+    height: 40px;
+  }
+
+  .auth-card h2 {
+    font-size: 24px;
+  }
+
+  .auth-subtitle {
+    font-size: 14px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .form-group input {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .auth-button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,204 @@
+.memory-card {
+  width: 100px;
+  height: 140px;
+  margin: 12px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.memory-card:hover {
+  transform: translateY(-5px);
+}
+
+.memory-card.flipped {
+  transform: scale(1.05);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.memory-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.card-front {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--light-color);
+  font-size: 36px;
+}
+
+.card-front::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0h2v20H9V0zm25.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm-20 20l1.732 1-10 17.32-1.732-1 10-17.32zM58.16 4.134l1 1.732-17.32 10-1-1.732 17.32-10zm-40 40l1 1.732-17.32 10-1-1.732 17.32-10zM80 9v2H60V9h20zm-60 0v2H0V9h20zm60.134 34.84l1.732 1-10 17.32-1.732-1 10-17.32zM60 60h20v2H60v-2zm0-20h20v2H60v-2zm-40 20h20v2H20v-2zm0-20h20v2H20v-2zm40 40h20v2H60v-2zm0-20h20v2H60v-2zm-40 20h20v2H20v-2zm0-20h20v2H20v-2z' fill='%23ffffff' fill-opacity='0.2'/%3E%3C/svg%3E");
+  opacity: 0.2;
+}
+
+.card-front::after {
+  content: '?';
+  font-size: 48px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: bold;
+  color: var(--light-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.front-design {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath fill='%23ffffff' fill-opacity='0.2' d='M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'%3E%3C/path%3E%3C/svg%3E");
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  animation: rotateSlow 15s linear infinite;
+}
+
+@keyframes rotateSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.card-back {
+  background-color: var(--light-color);
+  transform: rotateY(180deg);
+  border: 3px solid var(--accent-color);
+}
+
+.card-back::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23138086' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.card-content {
+  font-size: 48px;
+  animation: pop 0.3s ease-out;
+  position: relative;
+  z-index: 2;
+}
+
+.memory-card.matched .card-content {
+  animation: matched 0.8s ease-out;
+}
+
+.memory-card.recently-matched {
+  animation: recentlyMatched 1s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes matched {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3) rotate(5deg); }
+  75% { transform: scale(1.1) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes recentlyMatched {
+  0% { transform: translateY(0); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+  25% { transform: translateY(-10px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); }
+  50% { transform: translateY(0); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+  75% { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+  100% { transform: translateY(0); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+}
+
+/* Match indicator */
+.match-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 15px 5px var(--accent-color);
+  opacity: 0;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+
+/* Celebration particles */
+.celebration-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.celebration-particles::before,
+.celebration-particles::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: particle 1s ease-out forwards;
+}
+
+.celebration-particles::before {
+  background-color: var(--primary-color);
+  left: 20%;
+  top: 20%;
+}
+
+.celebration-particles::after {
+  background-color: var(--accent-color);
+  right: 20%;
+  top: 20%;
+  animation-delay: 0.3s;
+}
+
+@keyframes particle {
+  0% {
+    transform: scale(0) translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translate(40px, -40px);
+    opacity: 0;
+  }
+}
