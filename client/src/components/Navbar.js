@@ -13,9 +13,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-brand">
-        <NavLink to="/" className="nav-logo">Memory Match</NavLink>
+    <nav className="navbar">      <div className="navbar-brand">
+        <NavLink to="/" className="nav-logo">Dhyaan Chakra</NavLink>
       </div>      <div className="navbar-menu">
         <NavLink to="/" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
           Home
