@@ -54,3 +54,39 @@ a {
 button {
   cursor: pointer;
 }
+
+/* Responsive styles for the entire application */
+@media (max-width: 768px) {
+  .main-content {
+    padding-bottom: 30px;
+  }
+
+  .footer {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .main-content {
+    padding-bottom: 20px;
+  }
+
+  .footer {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  /* Improve touch targets on mobile */
+  button,
+  a.btn,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 40px;
+    min-width: 40px;
+  }
+}

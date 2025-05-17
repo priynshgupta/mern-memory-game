@@ -261,3 +261,109 @@
 .navbar-menu button.nav-item:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 10px 15px;
+    flex-wrap: wrap;
+  }
+
+  .navbar-brand {
+    flex: 1;
+  }
+
+  .navbar-menu {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+  }
+
+  .navbar-end {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .nav-item {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+
+  .user-info {
+    font-size: 14px;
+  }
+
+  .auth-btn, .logout-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  /* Sound control for tablet */
+  .sound-toggle-btn {
+    font-size: 1.1rem;
+  }
+
+  .volume-slider-container {
+    top: 38px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 8px 10px;
+  }
+
+  .nav-logo {
+    font-size: 20px;
+  }
+
+  .nav-logo::after {
+    top: -12px;
+    right: -20px;
+    font-size: 12px;
+  }
+
+  .navbar-menu {
+    gap: 5px;
+    margin-top: 8px;
+  }
+
+  .sound-toggle-btn {
+    padding: 4px 8px;
+    font-size: 1rem;
+  }
+
+  .volume-slider-container {
+    width: 80px;
+    padding: 8px;
+    top: 35px;
+    z-index: 10000;
+  }
+
+  .auth-btn, .logout-btn {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .user-level {
+    font-size: 10px;
+    padding: 1px 4px;
+  }
+
+  /* Enhanced mobile nav */
+  .nav-item {
+    padding: 4px 8px;
+    font-size: 13px;
+  }
+
+  .sound-control {
+    margin-left: 5px;
+  }
+
+  .user-info {
+    font-size: 12px;
+    gap: 4px;
+  }
+}

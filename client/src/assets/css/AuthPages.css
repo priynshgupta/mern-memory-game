@@ -369,7 +369,8 @@
 
 @media (max-width: 480px) {
   .auth-container {
-    padding: 15px;
+    padding: 15px 10px;
+    min-height: calc(100vh - 60px);
   }
 
   .auth-container::before,
@@ -378,35 +379,61 @@
   }
 
   .auth-card {
-    padding: 20px;
+    padding: 20px 15px;
     border-radius: 12px;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
   }
 
   .auth-card::before,
   .auth-card::after {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
 
   .auth-card h2 {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .auth-subtitle {
-    font-size: 14px;
+    font-size: 13px;
+    margin-bottom: 20px;
   }
 
   .form-group label {
-    font-size: 14px;
+    font-size: 13px;
+    margin-bottom: 6px;
   }
 
   .form-group input {
-    padding: 12px;
+    padding: 10px;
     font-size: 14px;
+    border-radius: 6px;
   }
 
   .auth-button {
     padding: 12px;
     font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .auth-redirect {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+
+  .error-message {
+    font-size: 12px;
+  }
+
+  .spiritual-symbol {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+  }
+
+  .auth-form {
+    gap: 15px;
   }
 }

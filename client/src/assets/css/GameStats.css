@@ -125,3 +125,58 @@
   50% { transform: scale(1.2); }
   100% { transform: scale(1); }
 }
+
+/* Responsive styles for tablet */
+@media screen and (max-width: 768px) {
+  .game-stats {
+    padding: 12px 10px;
+    margin-bottom: 20px;
+  }
+
+  .stat-box {
+    padding: 0 10px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+  }
+}
+
+/* Responsive styles for mobile */
+@media screen and (max-width: 480px) {
+  .game-stats {
+    padding: 10px 5px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat-box {
+    padding: 8px;
+    border-right: none;
+    border-bottom: 1px dashed rgba(19, 128, 134, 0.3);
+    width: 50%;
+    flex: 0 0 50%;
+  }
+
+  .stat-box:nth-child(even) {
+    border-left: 1px dashed rgba(19, 128, 134, 0.3);
+  }
+
+  .stat-box:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+}

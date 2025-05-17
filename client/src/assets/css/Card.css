@@ -202,3 +202,40 @@
     opacity: 0;
   }
 }
+
+/* Responsive Design for Cards */
+@media screen and (max-width: 768px) {
+  .memory-card {
+    width: 80px;
+    height: 112px;
+    margin: 8px;
+  }
+
+  .card-front, .card-back {
+    font-size: 2em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .memory-card {
+    width: 60px;
+    height: 84px;
+    margin: 5px;
+  }
+
+  .card-front, .card-back {
+    font-size: 1.5em;
+  }
+
+  .memory-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .memory-card.flipped {
+    transform: scale(1.02);
+  }
+
+  .card-inner {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}

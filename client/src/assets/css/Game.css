@@ -431,3 +431,121 @@
   opacity: 0.1;
   z-index: -1;
 }
+
+/* Responsive Design for Game Board */
+@media screen and (max-width: 768px) {
+  .game-container {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .game-board {
+    padding: 10px;
+    margin-top: 20px;
+  }
+
+  .memory-card {
+    width: 80px;
+    height: 112px; /* Maintain aspect ratio */
+    margin: 5px;
+  }
+
+  .game-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-stats {
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .game-over-modal, .level-complete-modal {
+    width: 90%;
+  }
+
+  .game-over h2 {
+    font-size: 28px;
+  }
+
+  .game-results {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .level-up-btn, .restart-btn, .leaderboard-btn {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+  .mantra-banner {
+    padding: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .game-container {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .game-board {
+    padding: 5px;
+    margin-top: 10px;
+    border-width: 1px;
+  }
+
+  .memory-card {
+    width: 60px;
+    height: 84px; /* Maintain aspect ratio */
+    margin: 3px;
+    font-size: 1.5em;
+  }
+
+  .game-status {
+    font-size: 16px;
+  }
+
+  .game-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .game-over-modal h2, .level-complete-modal h2 {
+    font-size: 1.25rem;
+  }
+
+  .game-over {
+    padding: 20px;
+    margin: 30px auto;
+  }
+
+  .game-over::before,
+  .game-over::after {
+    width: 40px;
+    height: 40px;
+  }
+
+  .level-up-btn, .restart-btn, .leaderboard-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .mantra-banner {
+    margin-bottom: 15px;
+  }
+
+  .mantra-symbol {
+    font-size: 20px;
+  }
+
+  .mantra-banner p {
+    font-size: 12px;
+  }
+
+  /* Better touch targets for mobile */
+  .game-options {
+    gap: 12px;
+  }
+}

@@ -311,13 +311,75 @@
   background-color: rgba(216, 17, 89, 0.1);
 }
 
+@media (max-width: 768px) {
+  .leaderboard-container {
+    padding: 20px 15px;
+  }
+
+  .leaderboard-section {
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  .leaderboard-section h2 {
+    font-size: 24px;
+  }
+
+  .leaderboard-table th {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .leaderboard-table td {
+    padding: 12px 10px;
+  }
+
+  .rank-number {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .leaderboard-table tr:hover {
+    transform: translateY(-1px);
+  }
+
+  .leaderboard-header {
+    padding: 20px 15px;
+  }
+}
+
 @media (max-width: 480px) {
+  .leaderboard-container {
+    padding: 15px 10px;
+  }
+
+  .leaderboard-section {
+    padding: 15px;
+    border-radius: 12px;
+  }
+
   .leaderboard-table {
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .leaderboard-table th {
+    padding: 10px 8px;
     font-size: 12px;
   }
 
+  .leaderboard-table td {
+    padding: 10px 8px;
+  }
+
   .leaderboard-header h1 {
-    font-size: 28px;
+    font-size: 24px;
+  }
+
+  .leaderboard-section h2 {
+    font-size: 20px;
+    padding-bottom: 10px;
   }
 
   .header-decoration::before,
@@ -328,5 +390,21 @@
   .section-decoration {
     width: 30px;
     height: 30px;
+  }
+
+  .rank-number {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    margin-right: 4px;
+  }
+
+  .user-scores td {
+    font-size: 12px;
+  }
+
+  .leaderboard-tabs button {
+    padding: 8px 12px;
+    font-size: 13px;
   }
 }
